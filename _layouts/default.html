@@ -7,12 +7,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
         .dark-mode {
-            background-color: #000;
-            color: #fff;
+            background-color: #111;
+            color: #f1f1f1;
+        }
+        .container {
+            max-width: 800px;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900" id="body">
+<body class="bg-gray-100 text-gray-900 transition-colors duration-500" id="body">
     <div class="container mx-auto p-4">
         <header class="mb-8 flex justify-between items-center">
             <div>
@@ -20,9 +23,16 @@
                 <p class="text-xl">{{ site.description }}</p>
             </div>
             <button id="toggleButton" class="bg-gray-800 text-white px-4 py-2 rounded">
-                Toggle Black/White
+                Toggle Dark/Light
             </button>
         </header>
+        <nav class="mb-8">
+            <ul class="flex space-x-4">
+                <li><a href="/" class="text-blue-500">Home</a></li>
+                <li><a href="/about" class="text-blue-500">About</a></li>
+                <li><a href="/contact" class="text-blue-500">Contact</a></li>
+            </ul>
+        </nav>
         <main>
             {{ content }}
         </main>
@@ -37,6 +47,31 @@
         toggleButton.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
         });
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                fetchPage(this.href);
+            });
+        });
+
+        function fetchPage(url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+                    window.history.pushState({ path: url }, '', url);
+                })
+                .catch(error => console.warn('Error fetching page:', error));
+        }
+
+        window.onpopstate = function (event) {
+            if (event.state && event.state.path) {
+                fetchPage(event.state.path);
+            }
+        };
     </script>
 </body>
 </html>
