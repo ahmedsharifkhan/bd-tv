@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.channel {
+    margin-bottom: 20px;
+}
+
+.channel img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.channel a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.channel a:hover {
+    text-decoration: underline;
+}
