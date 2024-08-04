@@ -1,14 +1,9 @@
 ---
-layout: home
+layout: default
+title: Home
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Channels</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
+
+    
     <style>
         .slider {
             display: flex;
@@ -21,8 +16,6 @@ layout: home
             cursor: pointer;
         }
     </style>
-</head>
-<body class="bg-gray-100">
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold text-center mb-4">Bangla TV Channels</h1>
         <div class="w-full mb-4">
@@ -261,5 +254,4 @@ layout: home
         player.src({ src: channels[0].link, type: 'application/x-mpegURL' });
         player.play();
     </script>
-</body>
-</html>
+

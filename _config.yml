@@ -27,8 +27,11 @@ url: https://ahmedsharifkhan.github.io # the base hostname & protocol for your s
 # twitter_username: jekyllrb
 # github_username:  jekyll
 
+# _config.yml
+permalink: pretty
+
 # Build settings
-# theme: minima
+theme: minima
 plugins:
   - jekyll-feed
 
