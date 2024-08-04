@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | escape }} - {{ site.title | escape }}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark-mode {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900" id="body">
+    <div class="container mx-auto p-4">
+        <header class="mb-8 flex justify-between items-center">
+            <div>
+                <h1 class="text-4xl font-bold">{{ site.title }}</h1>
+                <p class="text-xl">{{ site.description }}</p>
+            </div>
+            <button id="toggleButton" class="bg-gray-800 text-white px-4 py-2 rounded">
+                Toggle Black/White
+            </button>
+        </header>
+        <main>
+            {{ content }}
+        </main>
+        <footer class="mt-8 text-center">
+            <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }}. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        const body = document.getElementById('body');
+        const toggleButton = document.getElementById('toggleButton');
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
