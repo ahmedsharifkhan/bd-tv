@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Channels</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet" />
     <style>
         .slider {
             display: flex;
@@ -22,12 +23,16 @@
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold text-center mb-4">Bangla TV Channels</h1>
         <div class="w-full mb-4">
-            <video id="player" controls class="w-full h-96 bg-black"></video>
+            <video id="player" class="video-js vjs-default-skin w-full h-96 bg-black" controls>
+                <source src="http://stream.wowzacdn.com/fh3rhr3j3/23998_hhs/btv.m3u8" type="application/x-mpegURL">
+            </video>
         </div>
         <div class="slider space-x-4">
             <!-- Channel Logos will be inserted here by JavaScript -->
         </div>
     </div>
+    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls/dist/videojs-contrib-hls.min.js"></script>
     <script>
         const channels = [
             {
@@ -232,7 +237,7 @@
             }
         ];
 
-        const player = document.getElementById('player');
+        const player = videojs('player');
         const channelContainer = document.querySelector('.slider');
 
         channels.forEach(channel => {
@@ -242,7 +247,7 @@
             channelLogo.classList.add('h-20', 'w-20', 'rounded-full', 'hover:bg-gray-200', 'p-2');
 
             channelLogo.addEventListener('click', () => {
-                player.src = channel.link;
+                player.src({ src: channel.link, type: 'application/x-mpegURL' });
                 player.play();
             });
 
@@ -250,7 +255,7 @@
         });
 
         // Initialize with the first channel
-        player.src = channels[0].link;
+        player.src({ src: channels[0].link, type: 'application/x-mpegURL' });
         player.play();
     </script>
 </body>
