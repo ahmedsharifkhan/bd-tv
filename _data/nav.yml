@@ -1,0 +1,14 @@
+nav:
+  - title: "BD TV"
+    url: "/"
+  - title: "Movie"
+    url: "/movie/"
+  - title: "Sports"
+    url: "/sports/"
+    submenu:
+      - title: "Our Mission"
+        url: "/about/mission/"
+      - title: "Team"
+        url: "/about/team/"
+  - title: "Contact"
+    url: "/contact/"

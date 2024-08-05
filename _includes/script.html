@@ -1,0 +1,33 @@
+<script>
+    const body = document.getElementById('body');
+    const themeSwitcher = document.getElementById('themeSwitcher');
+
+    themeSwitcher.addEventListener('change', () => {
+        body.classList.toggle('dark-mode');
+    });
+
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            fetchPage(this.href);
+        });
+    });
+
+    function fetchPage(url) {
+        fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+                window.history.pushState({ path: url }, '', url);
+            })
+            .catch(error => console.warn('Error fetching page:', error));
+    }
+
+    window.onpopstate = function (event) {
+        if (event.state && event.state.path) {
+            fetchPage(event.state.path);
+        }
+    };
+</script>
