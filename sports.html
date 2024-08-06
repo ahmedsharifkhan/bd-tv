@@ -1,50 +1,75 @@
 ---
 layout: default
-title: Sports | English Sports Channel
+title: English Sports Channel
 permalink: /sports/
 ---
 
-<style>
-    .slider {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-    }
-    .slider img {
-        flex: 0 0 auto;
-        scroll-snap-align: start;
-        cursor: pointer;
-    }
-</style>
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold text-center mb-4">English Speaking Sports Channels</h1>
-    <div class="w-full mb-4">
-        <video id="player" class="video-js vjs-default-skin w-full h-96 bg-black" controls>
-            <source src="{{ site.data.sports[0].link }}" type="application/x-mpegURL">
-        </video>
-    </div>
-    <div class="slider space-x-4">
-        {% for channel in site.data.sports %}
-        <img src="{{ channel.logo }}" alt="{{ channel.name }}" class="h-20 w-20 rounded-full hover:bg-gray-200 p-2" data-link="{{ channel.link }}">
-        {% endfor %}
-    </div>
-</div>
-<script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls/dist/videojs-contrib-hls.min.js"></script>
-<script>
-    const player = videojs('player');
-    const channelLogos = document.querySelectorAll('.slider img');
 
-    channelLogos.forEach(logo => {
-        logo.addEventListener('click', () => {
-            player.src({ src: logo.getAttribute('data-link'), type: 'application/x-mpegURL' });
-            player.play();
+
+    <style>
+        .dark-mode {
+            background-color: #111;
+            color: #f1f1f1;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+        .slider img {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .slider img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+
+<body id="body" class="bg-white text-black">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold text-center mb-4">{{ page.title }}</h1>
+        <div class="w-full mb-4">
+            <video id="player" class="video-js vjs-default-skin w-full h-96 bg-black" controls>
+                <source src="{{ site.data.sports.sports[0].link }}" type="application/x-mpegURL">
+            </video>
+        </div>
+        <div class="slider space-x-4">
+            {% for channel in site.data.sports %}
+            <img src="{{ channel.logo }}" alt="{{ channel.name }}" class="h-20 w-20 rounded-full hover:bg-gray-200 p-2" data-link="{{ channel.link }}">
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls/dist/videojs-contrib-hls.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("DOM fully loaded and parsed");
+            const player = videojs('player');
+            const channelLogos = document.querySelectorAll('.slider img');
+
+            if (channelLogos.length === 0) {
+                console.error("No channels found. Check the site.data.sports reference and the YAML file.");
+            }
+
+            channelLogos.forEach(logo => {
+                logo.addEventListener('click', () => {
+                    console.log(`Switching to channel: ${logo.alt}`);
+                    player.src({ src: logo.getAttribute('data-link'), type: 'application/x-mpegURL' });
+                    player.play();
+                });
+            });
+
+            // Initialize with the first channel
+            if (channelLogos.length > 0) {
+                player.src({ src: channelLogos[0].getAttribute('data-link'), type: 'application/x-mpegURL' });
+                player.play();
+            }
         });
-    });
-
-    // Initialize with the first channel
-    if (channelLogos.length > 0) {
-        player.src({ src: channelLogos[0].getAttribute('data-link'), type: 'application/x-mpegURL' });
-        player.play();
-    }
-</script>
+    </script>
+</body>
+</html>
