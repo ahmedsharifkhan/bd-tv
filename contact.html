@@ -4,4 +4,61 @@ title: Contact
 permalink: /contact/
 ---
 
-<H1>Contact</H1>
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold text-center mb-4">Contact Us</h1>
+    <form id="contactForm" class="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="https://docs.google.com/forms/d/e/1FAIpQLSdvmXzyjlpxbB8WnLJcgasmSyun89rkJ-WT2aIaGRn7brg8-A/formResponse">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                Name
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" placeholder="Your name" required name="entry.2095132049" type="text" />
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                Email
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" name="entry.967107908" required>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
+                Message
+            </label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" rows="5" placeholder="Your message" name="entry.332861235" required></textarea>
+        </div>
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Send
+            </button>
+        </div>
+        <p id="formMessage" class="text-center text-sm mt-4"></p>
+    </form>
+</div>
+
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const form = event.target;
+        const formData = new FormData(form);
+        const formMessage = document.getElementById('formMessage');
+        formMessage.textContent = 'Sending...';
+    
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors'
+        })
+        .then(() => {
+            formMessage.textContent = 'Thank you for your message!';
+            formMessage.classList.add('text-green-500');
+            form.reset();
+        })
+        .catch(error => {
+            formMessage.textContent = 'Sorry, something went wrong. Please try again later.';
+            formMessage.classList.add('text-red-500');
+            console.error('Error:', error);
+        });
+    });
+    </script>
+    
