@@ -5,6 +5,8 @@ nav:
   #   url: "/movie/"
   # - title: "Sports"
   #   url: "/sports/"
+  - title: "Blog"
+    url: "/blog/"
   - title: "Age Calculation"
     url: "/agecalculator/"
     submenu:

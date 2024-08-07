@@ -1,5 +1,5 @@
 ---
-layout: blog-post
+layout: post
 
 title:  "Go ahead and edit it and re-build the site to see your changes"
 date:   2023-10-12 17:35:09 +0600

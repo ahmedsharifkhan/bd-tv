@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<article class="max-w-4xl mx-auto  dark:bg-gray-800 shadow-md rounded-lg overflow-hidden mt-6 p-6">
+    <header class="mb-6">
+        <h1 class="text-3xl font-bold mb-2">{{ page.title }}</h1>
+        <p class="text-gray-600 dark:text-gray-400">{{ page.date | date: "%B %d, %Y" }}</p>
+        <p class="text-gray-600 dark:text-gray-400">Categories: <b>{{ page.categories | join: ", " }}</b></p>
+    </header>
+
+    <img src="{{ page.image }}" alt="{{ page.title }}" class="w-full h-auto mb-6 rounded">
+
+    <div class="prose dark:prose-dark">
+        {{ content }}
+    </div>
+
+    <footer class="mt-6">
+        <div class="author-info flex items-center">
+            <img src="{{ page.team.image }}" alt="{{ page.team.name }}" class="w-16 h-16 rounded-full mr-4">
+            <div>
+                <h2 class="text-xl font-bold">{{ page.team.name }}</h2>
+                <p class="text-gray-600 dark:text-gray-400">{{ page.team.subtitle }}</p>
+                <p class="text-gray-600 dark:text-gray-400">{{ page.team.message }}</p>
+                <ul class="flex space-x-4 mt-2">
+                    {% for social in page.social_media %}
+                    <li>
+                        <a href="{{ social.username }}" target="_blank" class="text-blue-500 dark:text-blue-400 hover:underline">
+                            {{ social.name | capitalize }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </footer>
+</article>

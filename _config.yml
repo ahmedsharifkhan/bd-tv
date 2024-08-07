@@ -14,8 +14,8 @@ permalink: pretty
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-paginate
 
-# _config.yml
 paginate: 10
 paginate_path: "/page:num/"
 
