@@ -1,10 +1,12 @@
 nav:
   - title: "BD TV"
     url: "/"
-  - title: "Movie"
-    url: "/movie/"
-  - title: "Sports"
-    url: "/sports/"
+  # - title: "Movie"
+  #   url: "/movie/"
+  # - title: "Sports"
+  #   url: "/sports/"
+  - title: "Age Calculation"
+    url: "/agecalculator/"
     submenu:
       - title: "Our Mission"
         url: "/about/mission/"

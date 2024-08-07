@@ -1,0 +1,80 @@
+---
+layout: default
+title: Age Calculator
+permalink: /agecalculator/
+---
+
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold text-center mb-4">বয়স বের করার ক্যালকুলেটর</h1>
+    <form id="ageCalculatorForm" class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="currentDay">বিজ্ঞপ্তিতে উল্লেখিত তারিখ:</label>
+            <div class="flex space-x-2">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-900 dark:text-gray-300" id="currentDay" type="number" placeholder="দিন" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-900 dark:text-gray-300" id="currentMonth" type="number" placeholder="মাস" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-900 dark:text-gray-300" id="currentYear" type="number" placeholder="বছর" required>
+            </div>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="birthDay">আপনার জন্ম তারিখ:</label>
+            <div class="flex space-x-2">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-900 dark:text-gray-300" id="birthDay" type="number" placeholder="দিন" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-900 dark:text-gray-300" id="birthMonth" type="number" placeholder="মাস" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-900 dark:text-gray-300" id="birthYear" type="number" placeholder="বছর" required>
+            </div>
+        </div>
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                বয়স বের করুন
+            </button>
+        </div>
+        <p id="ageResult" class="text-center text-sm mt-4"></p>
+    </form>
+    <!-- <div class="flex justify-center">
+        <label for="themeSwitcher" class="flex items-center cursor-pointer">
+            <div class="relative">
+                <input type="checkbox" id="themeSwitcher" class="sr-only">
+                <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+            </div>
+            <div class="ml-3 text-gray-700 font-medium">Dark Mode</div>
+        </label>
+    </div> -->
+</div>
+<script>
+    const body = document.getElementById('body');
+    const themeSwitcher = document.getElementById('themeSwitcher');
+
+    themeSwitcher.addEventListener('change', () => {
+        body.classList.toggle('dark-mode');
+        document.querySelectorAll('form, input, label, p').forEach(element => {
+            element.classList.toggle('dark:bg-gray-800');
+            element.classList.toggle('dark:bg-gray-900');
+            element.classList.toggle('dark:text-gray-300');
+        });
+    });
+
+    document.getElementById('ageCalculatorForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const currentDay = parseInt(document.getElementById('currentDay').value);
+        const currentMonth = parseInt(document.getElementById('currentMonth').value) - 1;
+        const currentYear = parseInt(document.getElementById('currentYear').value);
+        const birthDay = parseInt(document.getElementById('birthDay').value);
+        const birthMonth = parseInt(document.getElementById('birthMonth').value) - 1;
+        const birthYear = parseInt(document.getElementById('birthYear').value);
+
+        const currentDate = new Date(currentYear, currentMonth, currentDay);
+        const birthDate = new Date(birthYear, birthMonth, birthDay);
+
+        const diff = currentDate - birthDate;
+        const ageDate = new Date(diff);
+
+        const ageYears = Math.abs(ageDate.getUTCFullYear() - 1970);
+        const ageMonths = ageDate.getUTCMonth();
+        const ageDays = ageDate.getUTCDate() - 1;
+
+        document.getElementById('ageResult').textContent = `আপনার বয়স ${ageYears} বছর, ${ageMonths} মাস এবং ${ageDays} দিন।`;
+        document.getElementById('ageResult').classList.add('text-green-500');
+    });
+</script>
